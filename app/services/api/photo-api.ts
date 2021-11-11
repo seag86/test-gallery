@@ -28,7 +28,7 @@ export class PhotoApi {
       }
 
       const photos = response.data
-      console.log('response', response.data)
+      //console.log('response', response.data)
       return { kind: "ok", photos }
     } catch (e) {
       __DEV__ && console.tron.log(e.message)

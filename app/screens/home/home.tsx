@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react"
-import { ImageStyle, Platform, TextStyle, View, ViewStyle, Text as RNText } from "react-native"
+import { ImageStyle, Platform, TextStyle, View, ViewStyle, FlatList, Text as RNText } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { useStores } from "../../models"
 import { observer } from "mobx-react-lite"
@@ -13,7 +13,7 @@ import {
   GradientBackground,
 } from "../../components"
 import { NavigatorParamList } from "../../navigators"
-import { color, spacing } from "../../theme"
+import { color, spacing, style } from "../../theme"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
 //export const logoIgnite = require("./logo-ignite.png")
@@ -57,8 +57,20 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
         <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
 
           {/* <RNText> {JSON.stringify(characters)}</RNText> */}
-          <RNText> {JSON.stringify(photoStore)}</RNText>
+          <RNText> {JSON.stringify(photoStore.photos)}</RNText>
 
+          {/* <SearchBox status={isLoading} />
+
+          <View style={[Layout.fill]}>
+              <View>
+                <FlatList
+                  data={dataOut}
+                  renderItem={renderItem}
+                  keyExtractor={item => item.id}
+                  ListFooterComponent={footerItem}
+                />
+              </View>
+          </View> */}
 
 
         </Screen>
