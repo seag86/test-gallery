@@ -1,10 +1,12 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
 export const PhotoModel = types.model("Photo").props({
-  id: types.identifierNumber,
-  name: types.maybe(types.string),
-  status: types.maybe(types.string),
-  image: types.maybe(types.string),
+  id: types.maybe(types.string),
+  author: types.maybe(types.string),
+  width: types.maybe(types.number),
+  height: types.maybe(types.number),
+  url: types.maybe(types.string),
+  download_url: types.maybe(types.string),
 })
 
 type PhotoType = Instance<typeof PhotoModel>

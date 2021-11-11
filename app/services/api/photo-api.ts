@@ -16,8 +16,9 @@ export class PhotoApi {
     try {
       // make the api call
       const response: ApiResponse<any> = await this.api.apisauce.get(
-        "https://raw.githubusercontent.com/infinitered/ignite/master/data/rick-and-morty.json",
-        { amount: API_PAGE_SIZE },
+        "https://picsum.photos/v2/list?limit=6",
+        // "https://raw.githubusercontent.com/infinitered/ignite/master/data/rick-and-morty.json",
+        // { amount: API_PAGE_SIZE },
       )
 
       // the typical ways to die when calling an api
@@ -26,8 +27,8 @@ export class PhotoApi {
         if (problem) return problem
       }
 
-      const photos = response.data.results
-
+      const photos = response.data
+      console.log('response', response.data)
       return { kind: "ok", photos }
     } catch (e) {
       __DEV__ && console.tron.log(e.message)

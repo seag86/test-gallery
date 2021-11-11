@@ -57,7 +57,7 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
         <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
 
           {/* <RNText> {JSON.stringify(characters)}</RNText> */}
-          <RNText> {JSON.stringify(photos)}</RNText>
+          <RNText> {JSON.stringify(photoStore)}</RNText>
 
 
 
