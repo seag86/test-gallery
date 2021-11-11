@@ -1,7 +1,7 @@
-import { CharacterStoreModel } from "./photo-store"
+import { PhotoStoreModel } from "./photo-store"
 
 test("can be created", () => {
-  const instance = CharacterStoreModel.create({})
+  const instance = PhotoStoreModel.create({})
 
   expect(instance).toBeTruthy()
 })

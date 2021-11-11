@@ -32,15 +32,19 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
   ({ navigation }) => {
     const goBack = () => navigation.goBack()
 
-    // const { characterStore } = useStores()
-    // const { characters } = characterStore
-
-    const { photoStore } = useStores()
-    const { photos } = photoStore
+    const { characterStore } = useStores()
+    const { characters } = characterStore
 
     const fetchStart = async () => {
-      await photoStore.getPhotos()
+      await characterStore.getCharacters()
     }
+
+    // const { photoStore } = useStores()
+    // const { photos } = photoStore
+
+    // const fetchStart = async () => {
+    //   await photoStore.getPhotos()
+    // }
 
     useEffect(() => {
       fetchStart()
@@ -52,7 +56,8 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
       <View testID="Home" style={FULL}>
         <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
 
-          <RNText> {JSON.stringify(photos)}</RNText>
+          <RNText> {JSON.stringify(characters)}</RNText>
+          {/* <RNText> {JSON.stringify(photos)}</RNText> */}
 
 
 
