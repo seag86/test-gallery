@@ -64,7 +64,7 @@ export const Details: FC<StackScreenProps<NavigatorParamList, "Details">> = obse
         {/* details */}
         <View style={[s.row]}>
           <TouchableOpacity style={[s.detailTeg, s.smallHMargin,]}
-            //onPress={() => navigate('Tags', { author: author })}
+            onPress={() => navigate('Tags', { author: author })}
           >
             <RNText style={[]}>
               <Text style={LOVE} tx="details.author" />

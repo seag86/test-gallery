@@ -37,12 +37,6 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
   ({ navigation }) => {
     const goBack = () => navigation.goBack()
 
-    // const { characterStore } = useStores()
-    // const { characters } = characterStore
-
-    // const fetchStart = async () => {
-    //   await characterStore.getCharacters()
-    // }
 
     const { photoStore } = useStores()
     const { photos } = photoStore
@@ -80,7 +74,6 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
     return (
       <View testID="Home" style={CONTAINER}>
 
-          {/* <RNText> {JSON.stringify(characters)}</RNText> */}
           {/* <RNText> {JSON.stringify(photos)}</RNText> */}
 
           <Searchbox />

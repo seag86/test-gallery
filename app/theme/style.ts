@@ -333,6 +333,15 @@ export const style = StyleSheet.create({
   tinput: {
     borderColor: color.lightGrey,
     borderWidth: 1,
+  },
+  tag: {
+    borderColor: '#ccc',
+    borderRadius: 8,
+    borderWidth: 1,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 10,
   }
 
 })
