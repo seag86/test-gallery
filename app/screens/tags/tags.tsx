@@ -27,6 +27,8 @@ const CONTAINER: ViewStyle = {
   marginTop: spacing[4],
   backgroundColor: color.transparent,
   paddingHorizontal: spacing[4],
+  flexDirection:'row',
+  flexWrap:'wrap'
 }
 
 const LOVE: TextStyle = {
@@ -38,11 +40,12 @@ const LOVE: TextStyle = {
 const BOLD: TextStyle = { fontWeight: "bold" }
 
 
-export const Tags: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
+export const TagsScr: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
   ({ navigation, route }) => {
     const goBack = () => navigation.goBack()
 
     const [tags, setTags] = useState([])
+
 
     const { photoStore } = useStores()
     const { photos } = photoStore
@@ -64,13 +67,13 @@ export const Tags: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
     const sortAuthors = (d: Array<any>) => {
 
       //const tags: Array<Tag>
-      let authors = d.reduce((acc, element) => {
+      const authors = d.reduce((acc, element) => {
         const [key, Name] = Object.entries(element)[1];
         (acc[Name] || (acc[Name] = [])).push(element);
         return acc;
       }, {});
 
-      let _tags = []
+      const _tags = []
       for (const author in authors) {
         _tags.push({
           author: author,
@@ -80,27 +83,35 @@ export const Tags: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
       setTags(_tags)
     }
 
+    const tagPressHandle = (tag) => {
+      //console.log('tags', authors[tag])
+      //tags
+
+    }
+
     return (
       <Screen testID="Tags" style={CONTAINER}>
 
         {/* <RNText> {JSON.stringify(tags)}</RNText> */}
+
         {
           tags.length
             ?
-            tags.map((tag, index) => {
-              return (
-                <View style={[s.row, s.smallBMargin]}>
-                  <TouchableOpacity style={[s.tag, s.mr5, s.mb10 ]}
-                  //onPress={() => navigate('Tags', { author: tag?.author })}
-                  >
-                    <RNText style={[]}>
-                      {tag?.author}
-                    </RNText>
-                  </TouchableOpacity>
-                  <View />
-                </View>
-              )
-            })
+              tags.map((tag, index) => {
+                return (
+                  <View style={[s.row, s.smallBMargin]}>
+                    <TouchableOpacity style={[s.tag, s.mr5, s.mb10 ]}
+                    //onPress={() => navigate('Tags', { author: tag?.author })}
+                    >
+                      <RNText style={[]}>
+                        {tag?.author}
+                      </RNText>
+                    </TouchableOpacity>
+                    <View />
+                  </View>
+                )
+              })
+
             : <RNText style={[]}>{'Loading...'}</RNText>
         }
 

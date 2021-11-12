@@ -8,7 +8,7 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen, Home, Details, Viewer, Tags } from "../screens"
+import { WelcomeScreen, DemoScreen, DemoListScreen, Home, Details, Viewer, TagsScr } from "../screens"
 import { navigationRef } from "./navigation-utilities"
 
 /**
@@ -49,7 +49,7 @@ const AppStack = () => {
       <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
       <Stack.Screen name="Details" component={Details} />
       <Stack.Screen name="Viewer" component={Viewer} />
-      <Stack.Screen name="Tags" component={Tags} />
+      <Stack.Screen name="Tags" component={TagsScr} />
 
       <Stack.Screen name="demo" component={DemoScreen} />
       <Stack.Screen name="demoList" component={DemoListScreen} />
