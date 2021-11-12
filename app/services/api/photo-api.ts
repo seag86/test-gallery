@@ -12,12 +12,12 @@ export class PhotoApi {
     this.api = api
   }
 
-  async getPhotos(): Promise<GetPhotosResult> {
+  async getPhotos(page: Number = 0, limit: Number = 5): Promise<GetPhotosResult> {
     try {
+      //console.log('get', `https://picsum.photos/v2/list?page=${page}&limit=${limit}`)
       // make the api call
       const response: ApiResponse<any> = await this.api.apisauce.get(
-        "https://picsum.photos/v2/list?limit=6",
-        // "https://raw.githubusercontent.com/infinitered/ignite/master/data/rick-and-morty.json",
+        `https://picsum.photos/v2/list?page=${page}&limit=${limit}`,
         // { amount: API_PAGE_SIZE },
       )
 
@@ -29,6 +29,29 @@ export class PhotoApi {
 
       const photos = response.data
       //console.log('response', response.data)
+      return { kind: "ok", photos }
+    } catch (e) {
+      __DEV__ && console.tron.log(e.message)
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getDetails(id: Number = 0): Promise<GetPhotosResult> {
+    try {
+      //console.log('get', `https://picsum.photos/id/${id}/info`)
+      // make the api call
+      const response: ApiResponse<any> = await this.api.apisauce.get(
+        `https://picsum.photos/id/${id}/info`,
+      )
+
+      // the typical ways to die when calling an api
+      if (!response.ok) {
+        const problem = getGeneralApiProblem(response)
+        if (problem) return problem
+      }
+
+      const photos = response.data
+      console.log('response', response.data)
       return { kind: "ok", photos }
     } catch (e) {
       __DEV__ && console.tron.log(e.message)

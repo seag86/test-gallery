@@ -16,12 +16,23 @@ export const PhotoStoreModel = types
     },
   }))
   .actions((self) => ({
-    getPhotos: async () => {
+    getPhotos: async (page: Number, limit: number) => {
       const photoApi = new PhotoApi(self.environment.api)
-      const result = await photoApi.getPhotos()
+      const result = await photoApi.getPhotos(page, limit)
 
       if (result.kind === "ok") {
         self.savePhotos(result.photos)
+      } else {
+        __DEV__ && console.tron.log(result.kind)
+      }
+    },
+    getDetails: async (id: Number) => {
+      const photoApi = new PhotoApi(self.environment.api)
+      const result = await photoApi.getDetails(id)
+
+      if (result.kind === "ok") {
+        //self.saveDetails(result.info)
+        console.log('getDetails result', result)
       } else {
         __DEV__ && console.tron.log(result.kind)
       }

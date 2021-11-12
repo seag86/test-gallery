@@ -22,11 +22,10 @@ import { NavigatorParamList } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
-//export const logoIgnite = require("./logo-ignite.png")
-//export const heart = require("./heart.png")
 
-const FULL: ViewStyle = { flex: 1 }
+
 const CONTAINER: ViewStyle = {
+  flex: 1,
   backgroundColor: color.transparent,
   paddingHorizontal: spacing[4],
 }
@@ -49,20 +48,22 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
     const { photos } = photoStore
 
     const fetchStart = async () => {
-      await photoStore.getPhotos()
+      let page = Math.round(Math.random() * 10)
+      // page = 0
+      await photoStore.getPhotos(page)
     }
 
     useEffect(() => {
       fetchStart()
     }, [])
 
-    const renderItem = (photoObj: Object) => {
-      const { id, download_url } = photoObj.item
+    const renderItem = (photo: Object) => {
+      const { id, download_url } = photo.item
       return (
         <TouchableOpacity
           activeOpacity={1}
           style={[s.previewBtn, s.center, s.mb15]}
-          //onPress={() => navigate('Details', { id: id.toString() })}
+          //onPress={() => navigate('Details', { photo: photo.item })}
         >
           <Image
             style={[s.previewImg]}
@@ -75,8 +76,7 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
 
 
     return (
-      <View testID="Home" style={FULL}>
-        <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
+      <View testID="Home" style={CONTAINER}>
 
           {/* <RNText> {JSON.stringify(characters)}</RNText> */}
           {/* <RNText> {JSON.stringify(photos)}</RNText> */}
@@ -95,7 +95,6 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
           </View>
 
 
-        </Screen>
       </View>
     )
   },
