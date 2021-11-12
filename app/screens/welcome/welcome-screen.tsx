@@ -86,9 +86,9 @@ const FOOTER_CONTENT: ViewStyle = {
   paddingHorizontal: spacing[4],
 }
 
-export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> = observer(
+export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "Welcome">> = observer(
   ({ navigation }) => {
-    const nextScreen = () => navigation.navigate("home")
+    const nextScreen = () => navigation.navigate("Home")
 
     return (
       <View testID="WelcomeScreen" style={FULL}>

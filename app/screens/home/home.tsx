@@ -33,7 +33,7 @@ const CONTAINER: ViewStyle = {
 const BOLD: TextStyle = { fontWeight: "bold" }
 
 
-export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
+export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
   ({ navigation }) => {
     const goBack = () => navigation.goBack()
 
@@ -65,7 +65,7 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
           activeOpacity={1}
           style={[s.previewBtn, s.center, s.mb15]}
           
-          onPress={() => navigate('details', { photo: photo.item })}
+          onPress={() => navigate('Details', { photo: photo.item })}
         >
           <Image
             style={[s.previewImg]}

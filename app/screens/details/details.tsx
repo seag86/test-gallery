@@ -18,7 +18,7 @@ import {
   AutoImage as Image,
   GradientBackground,
 } from "../../components"
-import { NavigatorParamList } from "../../navigators"
+import { NavigatorParamList, navigate } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
 
 
@@ -38,7 +38,7 @@ const LOVE: TextStyle = {
 const BOLD: TextStyle = { fontWeight: "bold" }
 
 
-export const Details: FC<StackScreenProps<NavigatorParamList, "details">> = observer(
+export const Details: FC<StackScreenProps<NavigatorParamList, "Details">> = observer(
   ({ navigation, route }) => {
     const goBack = () => navigation.goBack()
     const { download_url, author, id, width, height } = route.params.photo
@@ -53,7 +53,7 @@ export const Details: FC<StackScreenProps<NavigatorParamList, "details">> = obse
         <TouchableOpacity
           activeOpacity={1}
           style={[s.previewBtn, s.center, s.mb15]}
-        //onPress={() => navigate('viewer', { photo: download_url })}
+          onPress={() => navigate('Viewer', { photo: route.params.photo })}
         >
           <Image
             style={[s.previewImg]}
@@ -64,7 +64,7 @@ export const Details: FC<StackScreenProps<NavigatorParamList, "details">> = obse
         {/* details */}
         <View style={[s.row]}>
           <TouchableOpacity style={[s.detailTeg, s.smallHMargin,]}
-            onPress={() => navigate('Tags', { author: author })}
+            //onPress={() => navigate('Tags', { author: author })}
           >
             <RNText style={[]}>
               <Text style={LOVE} tx="details.author" />
