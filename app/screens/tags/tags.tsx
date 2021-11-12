@@ -3,7 +3,8 @@ import {
   ImageStyle, Platform, TextStyle, View, ViewStyle,
   TouchableOpacity,
   ScrollView,
-  Text as RNText
+  Text as RNText,
+  Dimensions
 } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { useStores } from "../../models"
@@ -22,6 +23,7 @@ import { NavigatorParamList, navigate } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
 import { PhotoStoreModel } from "../../models/photo-store/photo-store"
 
+const { width, height } = Dimensions.get('window')
 
 const CONTAINER: ViewStyle = {
   flex: 1,
@@ -33,12 +35,12 @@ const CONTAINER: ViewStyle = {
 }
 
 const SCROLL: ViewStyle = {
-  flex: 1,
-  marginTop: spacing[4],
-  backgroundColor: color.transparent,
-  paddingHorizontal: spacing[4],
+  width: width,
+  height: height,
+}
+const CONTENT: ViewStyle = {
   flexDirection: 'row',
-  flexWrap: 'wrap'
+  flexWrap: 'wrap',
 }
 
 
@@ -57,7 +59,7 @@ export const Tags: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
 
     const fetchMany = async () => {
       const page = 0
-      const limit = 30
+      const limit = 100
       await photoStore.getPhotos(page, limit)
     }
 
@@ -97,29 +99,32 @@ export const Tags: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
     return (
       <Screen testID="Tags" style={CONTAINER} isNonScrolling={false}>
 
-        {/* <RNText> {JSON.stringify(tags)}</RNText> */}
+        <ScrollView style={SCROLL}
+          contentContainerStyle={CONTENT}
+        >
+          {/* <RNText> {JSON.stringify(tags)}</RNText> */}
 
-        {
-          tags.length
-            ?
-            tags.map((tag, index) => {
-              return (
-                <View style={[s.row, s.smallBMargin]} key={index}>
-                  <TouchableOpacity style={[s.tag, s.mr5, s.mb10]}
-                    onPress={() => tagPressHandle(tag)}
-                  >
-                    <RNText style={[]}>
-                      {tag?.author}
-                    </RNText>
-                  </TouchableOpacity>
-                  <View />
-                </View>
-              )
-            })
+          {
+            tags.length
+              ?
+              tags.map((tag, index) => {
+                return (
+                  <View style={[s.row, s.smallBMargin]} key={index}>
+                    <TouchableOpacity style={[s.tag, s.mr5, s.mb10]}
+                      onPress={() => tagPressHandle(tag)}
+                    >
+                      <RNText style={[]}>
+                        {tag?.author}
+                      </RNText>
+                    </TouchableOpacity>
+                    <View />
+                  </View>
+                )
+              })
 
-            : <RNText style={[]}>{'Loading...'}</RNText>
-        }
-
+              : <RNText style={[]}>{'Loading...'}</RNText>
+          }
+        </ScrollView>
       </Screen>
     )
   },
