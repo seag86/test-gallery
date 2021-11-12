@@ -36,5 +36,9 @@
   "storybook": {
     "placeholder": "Placeholder",
     "field": "Field"
+  },
+  "details": {
+    "author": "Author: ",
+    "size": "Size: ",
   }
 }

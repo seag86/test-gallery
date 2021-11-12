@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions, Platform, TextStyle } from 'react-native'
-import { color } from '.'
+import { color, spacing } from '.'
 
 const { width, height } = Dimensions.get('window')
 const ios = Platform.OS === 'ios'
@@ -309,12 +309,12 @@ export const style = StyleSheet.create({
     backgroundColor: color.primary
   },
   previewImg: {
-    width: width,
+    width: width-2*spacing[4],
     height: width * 9 / 16,
     resizeMode: 'cover'
   },
   previewBtn: {
-    width: width,
+    width: width-2*spacing[4],
     height: width * 9 / 16,
     backgroundColor: '#ccc'
   },

@@ -18,7 +18,7 @@ import {
   AutoImage as Image,
   GradientBackground,
 } from "../../components"
-import { NavigatorParamList } from "../../navigators"
+import { NavigatorParamList, navigate } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
@@ -59,11 +59,13 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
 
     const renderItem = (photo: Object) => {
       const { id, download_url } = photo.item
+
       return (
         <TouchableOpacity
           activeOpacity={1}
           style={[s.previewBtn, s.center, s.mb15]}
-          //onPress={() => navigate('Details', { photo: photo.item })}
+          
+          onPress={() => navigate('details', { photo: photo.item })}
         >
           <Image
             style={[s.previewImg]}

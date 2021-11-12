@@ -8,7 +8,7 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen, Home } from "../screens"
+import { WelcomeScreen, DemoScreen, DemoListScreen, Home, Details } from "../screens"
 import { navigationRef } from "./navigation-utilities"
 
 /**
@@ -29,6 +29,9 @@ export type NavigatorParamList = {
   demoList: undefined
   
   home: undefined
+  details: undefined
+  viewer: undefined
+  tags: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -37,13 +40,16 @@ const Stack = createNativeStackNavigator<NavigatorParamList>()
 const AppStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
+      // screenOptions={{
+      //   headerShown: false,
+      // }}
       initialRouteName="home"
     >
-      <Stack.Screen name="welcome" component={WelcomeScreen} />
-      <Stack.Screen name="home" component={Home} />
+      <Stack.Screen name="welcome" component={WelcomeScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="home" component={Home} options={{headerShown: false}}/>
+      <Stack.Screen name="details" component={Details} />
+      {/* <Stack.Screen name="viewer" component={Viewer} /> */}
+      {/* <Stack.Screen name="tags" component={Tags} /> */}
 
       <Stack.Screen name="demo" component={DemoScreen} />
       <Stack.Screen name="demoList" component={DemoListScreen} />

@@ -24,27 +24,65 @@ import { color, spacing, style as s } from "../../theme"
 
 const CONTAINER: ViewStyle = {
   flex: 1,
+  marginTop: spacing[4],
   backgroundColor: color.transparent,
   paddingHorizontal: spacing[4],
+}
+
+const LOVE: TextStyle = {
+  color: "#BAB6C8",
+  fontSize: 15,
+  lineHeight: 22,
 }
 
 const BOLD: TextStyle = { fontWeight: "bold" }
 
 
-export const Details: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
-  ({ navigation }) => {
+export const Details: FC<StackScreenProps<NavigatorParamList, "details">> = observer(
+  ({ navigation, route }) => {
     const goBack = () => navigation.goBack()
+    const { download_url, author, id, width, height } = route.params.photo
 
 
 
     return (
-      <View testID="Details" style={CONTAINER}>
+      <Screen testID="Details" style={CONTAINER}>
 
-          {/* <RNText> {JSON.stringify(characters)}</RNText> */}
+        {/* <RNText> {JSON.stringify(route.params)}</RNText> */}
+
+        <TouchableOpacity
+          activeOpacity={1}
+          style={[s.previewBtn, s.center, s.mb15]}
+        //onPress={() => navigate('viewer', { photo: download_url })}
+        >
+          <Image
+            style={[s.previewImg]}
+            source={{ uri: download_url }}
+          />
+        </TouchableOpacity>
+
+        {/* details */}
+        <View style={[s.row]}>
+          <TouchableOpacity style={[s.detailTeg, s.smallHMargin,]}
+            onPress={() => navigate('Tags', { author: author })}
+          >
+            <RNText style={[]}>
+              <Text style={LOVE} tx="details.author" />
+              {author}
+            </RNText>
+          </TouchableOpacity>
+          <View />
+        </View>
+
+        <View style={[s.smallHPadding]}>
+          <RNText style={[]}>
+            <Text style={LOVE} tx="details.size" />
+            {width + 'x' + height}
+          </RNText>
+        </View>
 
 
-
-      </View>
+      </Screen>
     )
   },
 )
