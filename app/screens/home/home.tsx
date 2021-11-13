@@ -5,6 +5,7 @@ import {
   FlatList,
   Text as RNText
 } from "react-native"
+import FastImage from 'react-native-fast-image'
 import { StackScreenProps } from "@react-navigation/stack"
 import { useStores } from "../../models"
 import { observer } from "mobx-react-lite"
@@ -42,9 +43,10 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
     const { photos } = photoStore
 
     const fetchStart = async () => {
-      let page = Math.round(Math.random() * 10)
-      // page = 0
-      await photoStore.getPhotos(page)
+      //const page = Math.round(Math.random() * 10)
+      const page = 3
+      const limit = 20
+      await photoStore.getPhotos(page, limit)
     }
 
     useEffect(() => {
@@ -58,12 +60,17 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
         <TouchableOpacity
           activeOpacity={1}
           style={[s.previewBtn, s.center, s.mb15]}
-          
+
           onPress={() => navigate('Details', { photo: photo.item })}
         >
-          <Image
+          <FastImage
             style={[s.previewImg]}
-            source={{ uri: download_url }}
+            source={{
+              uri: download_url,
+              //headers: { Authorization: 'someAuthToken' },
+              priority: FastImage.priority.normal,
+            }}
+            resizeMode={FastImage.resizeMode.cover}
           />
         </TouchableOpacity>
       )
@@ -74,20 +81,20 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
     return (
       <View testID="Home" style={CONTAINER}>
 
-          {/* <RNText> {JSON.stringify(photos)}</RNText> */}
+        {/* <RNText> {JSON.stringify(photos)}</RNText> */}
 
-          <Searchbox />
+        <Searchbox />
 
-          <View style={[s.fill]}>
-            <View>
-              <FlatList
-                data={photos}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                //ListFooterComponent={footerItem}
-              />
-            </View>
+        <View style={[s.fill]}>
+          <View>
+            <FlatList
+              data={photos}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            //ListFooterComponent={footerItem}
+            />
           </View>
+        </View>
 
 
       </View>

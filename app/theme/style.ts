@@ -1,5 +1,6 @@
-import { StyleSheet, Dimensions, Platform, TextStyle } from 'react-native'
+import { StyleSheet, Dimensions, Platform, TextStyle, ViewStyle } from 'react-native'
 import { color, spacing } from '.'
+
 
 const { width, height } = Dimensions.get('window')
 const ios = Platform.OS === 'ios'
@@ -342,6 +343,36 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 10,
+  },
+  CONTAINER: {
+    flex: 1,
+    backgroundColor: color.transparent,
+    paddingHorizontal: spacing[4],
+  },
+  
+  DEMO: {
+    paddingVertical: spacing[4],
+    paddingHorizontal: spacing[4],
+    backgroundColor: color.palette.deepPurple,
+  },
+  cPurple: {
+    backgroundColor: color.palette.deepPurple,
+  },
+  cGrey: {
+    backgroundColor: color.palette.lightGrey,
+  },
+  DEMO_TEXT: {
+    fontWeight: "bold",
+    fontSize: 13,
+    letterSpacing: 2,
+  },
+  LOVE: {
+    color: "#BAB6C8",
+    fontSize: 15,
+  },
+  DISABLING: {
+    paddingVertical: spacing[4],
+    paddingHorizontal: spacing[4],
   }
 
 })

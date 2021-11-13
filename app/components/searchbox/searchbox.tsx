@@ -1,12 +1,14 @@
 import React from 'react'
 import { View, Image, TouchableOpacity, TextInput } from 'react-native'
 import { style as s } from "../../theme"
+import { NavigatorParamList, navigate } from "../../navigators"
 
-// interface Props {
-//   status?: boolean
-// }
 
 export function Searchbox() {
+
+  const onSearch = () => {
+    navigate('Login')
+  }
   
   return (
     <View
@@ -26,7 +28,7 @@ export function Searchbox() {
       />
       <TouchableOpacity
         style={[s.btn, s.center]}
-      //onPress={() => onChangeTheme({ darkMode: false })}
+        onPress={onSearch}
       >
         <Image
           style={[s.searchImg]}

@@ -5,6 +5,7 @@ import {
   NavigationState,
   NavigationAction,
   createNavigationContainerRef,
+  CommonActions,
 } from "@react-navigation/native"
 
 /* eslint-disable */
@@ -144,5 +145,16 @@ export function goBack() {
 export function resetRoot(params = { index: 0, routes: [] }) {
   if (navigationRef.isReady()) {
     navigationRef.resetRoot(params)
+  }
+}
+
+export function navigateAndSimpleReset(name: string, index = 0) {
+  if (navigationRef.isReady()) {
+    navigationRef.dispatch(
+      CommonActions.reset({
+        index,
+        routes: [{ name }],
+      }),
+    )
   }
 }

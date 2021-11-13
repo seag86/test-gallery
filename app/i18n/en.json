@@ -40,5 +40,11 @@
   "details": {
     "author": "Author: ",
     "size": "Size: "
+  },
+  "login": {
+    "login": "Log in: ",
+    "password": "Password",
+    "loginBtn": "Log in",
   }
+
 }

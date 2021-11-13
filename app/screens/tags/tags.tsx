@@ -59,14 +59,14 @@ export const Tags: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
 
     const fetchMany = async () => {
       const page = 0
-      const limit = 100
+      const limit = 30
       await photoStore.getPhotos(page, limit)
     }
 
     const tagPressHandle = async (tag) => {
-      //navigate('Home', { tag: tag })
-      await photoStore.savePhotos(tag.photos)
-      console.log('photos', photos)
+      navigate('Home')
+      //await photoStore.savePhotos(tag.photos)
+      //console.log('photos', photos)
     }
 
     useEffect(() => {
