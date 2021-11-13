@@ -5,6 +5,7 @@ import {
   FlatList,
   Text as RNText
 } from "react-native"
+import FastImage from 'react-native-fast-image'
 import { StackScreenProps } from "@react-navigation/stack"
 import { useStores } from "../../models"
 import { observer } from "mobx-react-lite"
@@ -55,9 +56,18 @@ export const Details: FC<StackScreenProps<NavigatorParamList, "Details">> = obse
           style={[s.previewBtn, s.center, s.mb15]}
           onPress={() => navigate('Viewer', { photo: route.params.photo })}
         >
-          <Image
+          {/* <Image
             style={[s.previewImg]}
             source={{ uri: download_url }}
+          /> */}
+          <FastImage
+            style={[s.previewImg]}
+            source={{
+              uri: download_url,
+              //headers: { Authorization: 'someAuthToken' },
+              priority: FastImage.priority.normal,
+            }}
+            resizeMode={FastImage.resizeMode.cover}
           />
         </TouchableOpacity>
 

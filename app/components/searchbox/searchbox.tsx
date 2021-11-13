@@ -7,7 +7,8 @@ import { NavigatorParamList, navigate } from "../../navigators"
 export function Searchbox() {
 
   const onSearch = () => {
-    navigate('Login')
+    //navigate('Login')
+    navigate('Tags')
   }
   
   return (
