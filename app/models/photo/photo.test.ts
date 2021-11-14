@@ -2,7 +2,7 @@ import { PhotoModel } from "./photo"
 
 test("can be created", () => {
   const instance = PhotoModel.create({
-    id: 0,
+    id: "0",
     author: "Alejandro Escamilla",
     width: 5616,
     height: 3744,

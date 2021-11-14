@@ -1,7 +1,7 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
 export const PhotoModel = types.model("Photo").props({
-  id: types.maybe(types.number),
+  id: types.maybe(types.string),
   author: types.maybe(types.string),
   width: types.maybe(types.number),
   height: types.maybe(types.number),
