@@ -1,9 +1,6 @@
 import React, { FC, useState, useEffect } from "react"
 import {
-  ImageStyle, Platform, TextStyle, ViewStyle,
-  Image,
   View,
-  TextInput,
   TouchableOpacity,
   FlatList,
   Text as RNText
@@ -11,23 +8,13 @@ import {
 import FastImage from 'react-native-fast-image'
 import { StackScreenProps } from "@react-navigation/stack"
 import { useStores } from "../../models"
+import { PhotoModel } from "../../models/photo/photo"
 import { observer } from "mobx-react-lite"
 import {
-  Button,
-  Text,
   Searchbox,
 } from "../../components"
 import { NavigatorParamList, navigate } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
-
-
-const CONTAINER: ViewStyle = {
-  flex: 1,
-  backgroundColor: color.transparent,
-  paddingHorizontal: spacing[4],
-}
-
-const BOLD: TextStyle = { fontWeight: "bold" }
 
 
 export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
@@ -50,15 +37,15 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
       fetchStart()
     }, [])
 
-    const renderItem = (photo: Object) => {
-      const { id, download_url } = photo.item
+    const renderItem = (photo:  typeof PhotoModel) => {
+      const { id, download_url } = photo?.item
 
       return (
         <TouchableOpacity
           activeOpacity={1}
           style={[s.previewBtn, s.center, s.mb15]}
 
-          onPress={() => navigate('Details', { photo: photo.item })}
+          onPress={() => navigate('Details', { photo: photo?.item })}
         >
           <FastImage
             style={[s.previewImg]}
@@ -76,11 +63,11 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
 
 
     return (
-      <View testID="Home" style={CONTAINER}>
+      <View testID="Home" style={s.CONTAINER}>
 
         {/* <RNText> {JSON.stringify(photos)}</RNText> */}
 
-        <Searchbox tag={ route.params?.tag }/>
+        <Searchbox tag={route.params?.tag} />
 
         <View style={[s.fill]}>
           <View>

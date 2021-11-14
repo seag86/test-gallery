@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 import {
-  ImageStyle, Platform, TextStyle, View, ViewStyle,
-  TouchableOpacity,
-  FlatList,
+  View, 
   TextInput,
   Text as RNText
 } from "react-native"
@@ -14,7 +12,7 @@ import {
   Text,
   Screen,
 } from "../../components"
-import { NavigatorParamList, navigate, navigateAndSimpleReset } from "../../navigators"
+import { NavigatorParamList, navigateAndSimpleReset } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
 import { saveString, loadString } from "../../utils/storage"
 
@@ -35,20 +33,29 @@ export const Login: FC<StackScreenProps<NavigatorParamList, "Login">> = observer
       }
     }
 
-    const loadCredentials = () => {
-      const savedLogin = loadString('login')
-      const savedPass = loadString('pass')
-      console.log('savedLogin', savedLogin, savedPass)
-    }
-
     const checkFields = () => {
       setTimeout(() => {
         if (login && pass) {
           setCredentialsCorrect(true)
+          fetchStart()
         } else {
           setCredentialsCorrect(false)
         }
       }, 10)
+    }
+
+    const { photoStore } = useStores()
+
+    const fetchStart = async () => {
+      //const page = Math.round(Math.random() * 10)
+      const page = 3
+      const limit = 20
+      await photoStore.getPhotos(page, limit)
+    }
+
+    const loadCredentials = () => {
+      const savedLogin = loadString('login')
+      const savedPass = loadString('pass')
     }
 
     useEffect(() => {
@@ -56,10 +63,7 @@ export const Login: FC<StackScreenProps<NavigatorParamList, "Login">> = observer
     }, [])
 
     return (
-      <Screen testID="Login" style={s.CONTAINER}>
-
-        {/* <RNText> {JSON.stringify(photos)}</RNText> */}
-
+      <Screen style={s.CONTAINER}>
 
         <Text style={[s.LOVE, s.mt10]} preset="header" tx="login.login" />
         <View
@@ -76,7 +80,7 @@ export const Login: FC<StackScreenProps<NavigatorParamList, "Login">> = observer
             }}
             value={login}
             selectTextOnFocus
-            style={[s.tinput, s.fill, s.ph10]}
+            style={[s.vinput, s.fill, s.ph10]}
           />
         </View>
 
@@ -95,7 +99,7 @@ export const Login: FC<StackScreenProps<NavigatorParamList, "Login">> = observer
             }}
             value={pass}
             selectTextOnFocus
-            style={[s.tinput, s.fill, s.ph10]}
+            style={[s.vinput, s.fill, s.ph10]}
           />
         </View>
 

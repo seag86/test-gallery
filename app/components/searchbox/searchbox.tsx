@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Image, TouchableOpacity, TextInput } from 'react-native'
 import { style as s } from "../../theme"
-import { NavigatorParamList, navigate } from "../../navigators"
+import { navigate } from "../../navigators"
 import { useStores } from "../../models"
 
 export function Searchbox(props) {
@@ -22,11 +22,6 @@ export function Searchbox(props) {
     setSearchText('')
     fetchStart()
   }
-
-  useEffect(() => {
-    //setSearchText(props.tag)
-    console.log('tag', props.tag)
-  }, [])
 
 
   return (
