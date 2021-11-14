@@ -309,6 +309,12 @@ export const style = StyleSheet.create({
     height: 50,
     backgroundColor: color.primary
   },
+  close: {
+    width: 50,
+    height: 50,
+    position: 'absolute',
+    right: 0
+  },
   previewImg: {
     width: width-2*spacing[4],
     height: width * 9 / 16,
@@ -331,9 +337,13 @@ export const style = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-  tinput: {
+  vinput: {
     borderColor: color.lightGrey,
     borderWidth: 1,
+  },
+  tinput: {
+    width: width-85
+    //flex: 1
   },
   tag: {
     borderColor: '#ccc',

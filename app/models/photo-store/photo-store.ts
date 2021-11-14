@@ -14,9 +14,6 @@ export const PhotoStoreModel = types
     savePhotos: (photoSnapshots: PhotoSnapshot[]) => {
       self.photos.replace(photoSnapshots)
     },
-    saveTags: (photoTags) => {
-      self.tags.replace(photoTags)
-    },
   }))
   .actions((self) => ({
     getPhotos: async (page: Number, limit: number) => {

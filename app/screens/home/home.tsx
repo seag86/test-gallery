@@ -1,6 +1,9 @@
-import React, { FC, useEffect } from "react"
+import React, { FC, useState, useEffect } from "react"
 import {
-  ImageStyle, Platform, TextStyle, View, ViewStyle,
+  ImageStyle, Platform, TextStyle, ViewStyle,
+  Image,
+  View,
+  TextInput,
   TouchableOpacity,
   FlatList,
   Text as RNText
@@ -10,19 +13,12 @@ import { StackScreenProps } from "@react-navigation/stack"
 import { useStores } from "../../models"
 import { observer } from "mobx-react-lite"
 import {
-  BulletItem,
   Button,
-  Header,
   Text,
-  Screen,
   Searchbox,
-  AutoImage as Image,
-  GradientBackground,
 } from "../../components"
 import { NavigatorParamList, navigate } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
-import { Api } from "../../services/api"
-import { save } from "../../utils/storage"
 
 
 const CONTAINER: ViewStyle = {
@@ -35,7 +31,7 @@ const BOLD: TextStyle = { fontWeight: "bold" }
 
 
 export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
-  ({ navigation }) => {
+  ({ navigation, route }) => {
     const goBack = () => navigation.goBack()
 
 
@@ -48,6 +44,7 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
       const limit = 20
       await photoStore.getPhotos(page, limit)
     }
+
 
     useEffect(() => {
       fetchStart()
@@ -83,7 +80,7 @@ export const Home: FC<StackScreenProps<NavigatorParamList, "Home">> = observer(
 
         {/* <RNText> {JSON.stringify(photos)}</RNText> */}
 
-        <Searchbox />
+        <Searchbox tag={ route.params?.tag }/>
 
         <View style={[s.fill]}>
           <View>

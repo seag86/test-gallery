@@ -22,6 +22,7 @@ import {
 import { NavigatorParamList, navigate } from "../../navigators"
 import { color, spacing, style as s } from "../../theme"
 import { PhotoStoreModel } from "../../models/photo-store/photo-store"
+import { async } from "validate.js"
 
 const { width, height } = Dimensions.get('window')
 
@@ -49,52 +50,28 @@ const BOLD: TextStyle = { fontWeight: "bold" }
 
 export const Tags: FC<StackScreenProps<NavigatorParamList, "Tags">> = observer(
   ({ navigation, route }) => {
-    const goBack = () => navigation.goBack()
 
     const [tags, setTags] = useState([])
 
-
     const { photoStore } = useStores()
-    const { photos } = photoStore
 
     const fetchMany = async () => {
       const page = 0
       const limit = 30
-      await photoStore.getPhotos(page, limit)
+      const tags_ = await photoStore.getTags(page, limit)
+      setTags(tags_)
     }
 
-    const tagPressHandle = async (tag) => {
-      navigate('Home')
-      //await photoStore.savePhotos(tag.photos)
-      //console.log('photos', photos)
+    const tagPressHandle = async (tag: any) => {
+      await photoStore.savePhotos(tag.photos)
+      navigate('Home', {tag: tag.author})
     }
 
     useEffect(() => {
       fetchMany()
     }, [])
 
-    useEffect(() => {
-      photos?.length && sortAuthors(photos)
-    }, [photos])
-
-    const sortAuthors = (d: Array<any>) => {
-      const authors = d.reduce((acc, element) => {
-        const [key, Name] = Object.entries(element)[1];
-        (acc[Name] || (acc[Name] = [])).push(element);
-        return acc;
-      }, {});
-
-      const _tags: Array<any> = []
-      for (const author in authors) {
-        _tags.push({
-          author: author,
-          photos: authors[author]
-        })
-      }
-      setTags(_tags)
-    }
-
-
+ 
 
     return (
       <Screen testID="Tags" style={CONTAINER} isNonScrolling={false}>
