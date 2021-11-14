@@ -56,10 +56,6 @@ export const Details: FC<StackScreenProps<NavigatorParamList, "Details">> = obse
           style={[s.previewBtn, s.center, s.mb15]}
           onPress={() => navigate('Viewer', { photo: route.params.photo })}
         >
-          {/* <Image
-            style={[s.previewImg]}
-            source={{ uri: download_url }}
-          /> */}
           <FastImage
             style={[s.previewImg]}
             source={{
