@@ -14,6 +14,9 @@ export const PhotoStoreModel = types
     savePhotos: (photoSnapshots: PhotoSnapshot[]) => {
       self.photos.replace(photoSnapshots)
     },
+    saveTags: (photoTags) => {
+      self.tags.replace(photoTags)
+    },
   }))
   .actions((self) => ({
     getPhotos: async (page: Number, limit: number) => {
@@ -33,6 +36,35 @@ export const PhotoStoreModel = types
       if (result.kind === "ok") {
         //self.saveDetails(result.info)
         console.log('getDetails result', result)
+      } else {
+        __DEV__ && console.tron.log(result.kind)
+      }
+    },
+    getTags: async (page: Number, limit: number) => {
+      const photoApi = new PhotoApi(self.environment.api)
+      const result = await photoApi.getPhotos(page, limit)
+
+      const sortAuthors = (d: Array<any>) => {
+        const authors = d.reduce((acc, element) => {
+          const [key, Name] = Object.entries(element)[1];
+          (acc[Name] || (acc[Name] = [])).push(element);
+          return acc;
+        }, {});
+  
+        const _tags: Array<any> = []
+        for (const author in authors) {
+          _tags.push({
+            author: author,
+            photos: authors[author]
+          })
+        }
+        return _tags
+      }
+
+      if (result.kind === "ok") {
+
+        const tags = sortAuthors(result.photos)
+        return tags
       } else {
         __DEV__ && console.tron.log(result.kind)
       }
